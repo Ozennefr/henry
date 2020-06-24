@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  henry_dev:
+    image: henry_dev
+    command: make start
+    volumes: 
+        - .:/henry:cached
+    env_file: 
+      - env/dev.env
+      - env/db.env
+    environment:
+      - POSTGRES_HOST=db
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:11
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file: env/db.env
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    env_file: env/adminer.env
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+
+volumes:
+  pg-data:

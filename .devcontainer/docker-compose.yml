@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  henry_dev:
+    volumes: 
+        - vscode_ext:/home/root/.vscode-server/extensions
+        - vscode_ext_insiders:/home/root/.vscode-server-insiders/extensions
+    command: /bin/sh -c "while sleep 1000; do :; done"
+volumes:
+  vscode_ext:
+  vscode_ext_insiders:
